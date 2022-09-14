@@ -17,20 +17,6 @@ function newStart() {
   if (!localStorage.getItem(timekey)) {
     return;
   }
+  const currentVideoTime = localStorage.getItem(timekey);
+  player.setCurrentTime(currentVideoTime ?? 0);
 }
-const currentVideoTime = localStorage.getItem(timekey);
-player
-  .setCurrentTime(currentVideoTime)
-  .then(() => {
-    player.play();
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-// the time was < 0 || the time > the video’s duration
-        break;
-      default:
-// another error occurred
-        break;
-    }
-  });
