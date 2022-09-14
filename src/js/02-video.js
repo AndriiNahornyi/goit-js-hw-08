@@ -1,16 +1,16 @@
 import Player from '@vimeo/player';
-// имортируем названия скрипта с пекендж джейсон
+// import script name from package.json
 import Throttle from 'lodash.throttle';
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
-// переменная для удобства для функции videoplayer-current-time
+// create const for function videoplayer-current-time (for easy use)
 const timekey = 'videoplayer-current-time';
 player.on('timeupdate', durationSavelocalstorage);
-// создали функцию, с помощью деструктаризации вытащили секунды собьекта тайм апдейт(записали в локальное хранилище)
+// create function, by restructuring got seconds from the object timeupdate (recorded to the localStorage)
 function durationSavelocalstorage({ seconds }) {
   localStorage.setItem(timekey, seconds);
 }
-// при перезагрузки страницы перезагружался плеер
+// the palayer restarted when the page was loaded
 window.addEventListener('load', newStart);
 player.on('timeupdate', Throttle(durationSavelocalstorage, 1000));
 function newStart() {
@@ -27,10 +27,10 @@ player
   .catch(function (error) {
     switch (error.name) {
       case 'RangeError':
-        // the time was less than 0 or greater than the video’s duration
+// the time was < 0 || the time > the video’s duration
         break;
       default:
-        // some other error occurred
+// another error occurred
         break;
     }
   });
