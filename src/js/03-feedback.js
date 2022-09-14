@@ -34,7 +34,7 @@ function storageFormData(event) {
     // console.dir(event.target.value);
     // console.log('name input:', event.target.name);
     // console.log('value input:', event.target.value);
-    formValue[event.target.name] = event.target.value;
+    formValue[event.target.name] = event.target.value.trim();
     // console.log(formValue);
     localStorage.setItem(localKey, JSON.stringify(formValue));
 }
